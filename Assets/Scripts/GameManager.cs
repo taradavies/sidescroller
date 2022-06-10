@@ -1,12 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] int _lives;
-    public int Lives { get; private set; }
     public static GameManager Instance { get; private set; }
+    public int Lives { get; private set; }
+    [SerializeField] int _lives;
+    public event Action<int> OnLivesChanged;
+
     void Awake()
     {
         Lives = _lives;
@@ -21,6 +22,7 @@ public class GameManager : MonoBehaviour
 
     public void KillPlayer() {
         Lives--;
+        OnLivesChanged?.Invoke(Lives);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
