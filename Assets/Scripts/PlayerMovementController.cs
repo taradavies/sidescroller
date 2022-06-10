@@ -5,10 +5,10 @@ using UnityEngine;
 
 [RequireComponent(typeof(CharacterGrounding))]
 [RequireComponent(typeof(Rigidbody2D))]
-public class PlayerMovementController : MonoBehaviour
+public class PlayerMovementController : MonoBehaviour, IMove
 {
     [Header("---Horizontal Movement---")]
-    [SerializeField] float _moveSpeed = 20f;
+    [SerializeField] float _moveSpeed = 5f;
 
     [Header("---Jump---")]
     [SerializeField] float _jumpVelocity;
@@ -17,6 +17,8 @@ public class PlayerMovementController : MonoBehaviour
     Rigidbody2D _rb;
     CharacterGrounding _groundChecker;
     float _horizontalInput;
+
+    public float Speed { get; private set; }
 
     void Awake()
     {
@@ -27,8 +29,9 @@ public class PlayerMovementController : MonoBehaviour
     void Update() 
     {
         _horizontalInput = Input.GetAxis("Horizontal");
+        Speed = Mathf.Abs(_horizontalInput);
     }
-    
+
     void FixedUpdate()
     {
         // move based on user input

@@ -1,13 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterAnimation : MonoBehaviour
 {
     Animator _animator;
+    IMove mover;
     void Awake()
     {
         _animator = GetComponent<Animator>();
+        mover = GetComponent<IMove>();
     }
 
     void Update() 
@@ -18,6 +18,6 @@ public class CharacterAnimation : MonoBehaviour
     void UpdateAnimator()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
-        _animator.SetFloat("Speed", Mathf.Abs(horizontalInput));
+        _animator.SetFloat("Speed", mover.Speed);
     }
 }
