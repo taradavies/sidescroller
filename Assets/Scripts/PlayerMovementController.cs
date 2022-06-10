@@ -11,30 +11,24 @@ public class PlayerMovementController : MonoBehaviour
     [Header("Jump")]
     [SerializeField] float _jumpVelocity;
 
-    [Header("---Ground Check---")]
-    [SerializeField] Transform _groundCheck;
-    [SerializeField] float _distanceFromGround;
-    [SerializeField] LayerMask _groundMask;
-
     // private variables
-    bool _isGrounded;
     Rigidbody2D _rb;
     float _horizontalInput;
+    CharacterGrounding _groundChecker;
 
     void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _groundChecker = GetComponent<CharacterGrounding>();
     }
 
-    void Update() {
+    void Update() 
+    {
         _horizontalInput = Input.GetAxis("Horizontal");
     }
 
     void FixedUpdate()
     {
-        // check if grounded
-        UpdateIsGrounded();
-
         // move based on user input
         MoveHorizontal();
 
@@ -45,17 +39,10 @@ public class PlayerMovementController : MonoBehaviour
         }
     }
 
-    private void MoveHorizontal()
+    void MoveHorizontal()
     {
         _rb.velocity = new Vector2(_horizontalInput * _moveSpeed, _rb.velocity.y);
     }
-
-    private void UpdateIsGrounded()
-    {
-        var groundSensor = Physics2D.OverlapCircle(_groundCheck.position, _distanceFromGround, _groundMask);
-        _isGrounded = groundSensor != null;
-    }
-
     void Jump()
     {
         _rb.velocity = new Vector2(_rb.velocity.x, _jumpVelocity);
@@ -63,6 +50,6 @@ public class PlayerMovementController : MonoBehaviour
 
     bool ShouldStartJump()
     {
-        return Input.GetButton("Jump") && _isGrounded;
+        return Input.GetButton("Jump") && _groundChecker.IsGrounded;
     }
 }
