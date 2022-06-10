@@ -29,7 +29,7 @@ public class PlayerMovementController : MonoBehaviour, IMove
     void Update() 
     {
         _horizontalInput = Input.GetAxis("Horizontal");
-        Speed = Mathf.Abs(_horizontalInput);
+        Speed = _horizontalInput;
     }
 
     void FixedUpdate()

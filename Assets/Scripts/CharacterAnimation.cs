@@ -1,23 +1,36 @@
+using System;
 using UnityEngine;
 
+[RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(Animator))]
 public class CharacterAnimation : MonoBehaviour
 {
     Animator _animator;
-    IMove mover;
+    IMove _mover;
+    SpriteRenderer _spriteRenderer;
+    float _moveSpeed;
     void Awake()
     {
         _animator = GetComponent<Animator>();
-        mover = GetComponent<IMove>();
+        _mover = GetComponent<IMove>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Update() 
     {
+        _moveSpeed = _mover.Speed;
         UpdateAnimator();
+        FlipSprite();
+    }
+
+    void FlipSprite()
+    {
+        if (_moveSpeed != 0)
+            _spriteRenderer.flipX = _moveSpeed > 0;
     }
 
     void UpdateAnimator()
     {
-        float horizontalInput = Input.GetAxis("Horizontal");
-        _animator.SetFloat("Speed", mover.Speed);
+        _animator.SetFloat("Speed", Mathf.Abs(_moveSpeed));
     }
 }
