@@ -6,8 +6,9 @@ using UnityEngine.SceneManagement;
 public class KillOnEnter : MonoBehaviour
 {
     void OnTriggerEnter2D(Collider2D collider) {
-        if (collider.TryGetComponent<PlayerMovementController>(out var player)) {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        if (collider.TryGetComponent<PlayerMovementController>(out var player))
+        {
+            GameManager.Instance.KillPlayer();
         }
     }
 }
