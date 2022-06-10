@@ -15,8 +15,8 @@ public class PlayerMovementController : MonoBehaviour
 
     // private variables
     Rigidbody2D _rb;
-    float _horizontalInput;
     CharacterGrounding _groundChecker;
+    float _horizontalInput;
 
     void Awake()
     {
@@ -28,7 +28,7 @@ public class PlayerMovementController : MonoBehaviour
     {
         _horizontalInput = Input.GetAxis("Horizontal");
     }
-
+    
     void FixedUpdate()
     {
         // move based on user input
