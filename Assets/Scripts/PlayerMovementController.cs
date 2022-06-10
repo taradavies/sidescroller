@@ -3,12 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(CharacterGrounding))]
+[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovementController : MonoBehaviour
 {
-    [Header("---Movement---")]
+    [Header("---Horizontal Movement---")]
     [SerializeField] float _moveSpeed = 20f;
 
-    [Header("Jump")]
+    [Header("---Jump---")]
     [SerializeField] float _jumpVelocity;
 
     // private variables

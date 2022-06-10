@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 42130395}
   - component: {fileID: 42130394}
   - component: {fileID: 42130396}
+  - component: {fileID: 42130399}
   - component: {fileID: 42130397}
   - component: {fileID: 42130398}
   m_Layer: 0
@@ -223,11 +224,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveSpeed: 4
   _jumpVelocity: 3
-  _groundCheck: {fileID: 1570982049}
-  _distanceFromGround: 0.02
-  _groundMask:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!50 &42130397
 Rigidbody2D:
   serializedVersion: 4
@@ -265,6 +261,23 @@ CapsuleCollider2D:
   m_Offset: {x: -0.13584542, y: -0.015981793}
   m_Size: {x: 1.1624184, y: 1.9480364}
   m_Direction: 0
+--- !u!114 &42130399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 42130393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 279fca7ab90e73644b11e2692bba9d24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _groundCheck: {fileID: 1570982049}
+  _distanceFromGround: 0.02
+  _groundMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &490211327
 GameObject:
   m_ObjectHideFlags: 0
