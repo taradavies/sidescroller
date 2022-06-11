@@ -8,6 +8,7 @@ public class CharacterGrounding : MonoBehaviour
     [SerializeField] Transform _groundCheck;
     [SerializeField] float _distanceFromGround;
     [SerializeField] LayerMask _groundMask;
+
     public bool IsGrounded { get; private set; }
 
     void Update() 
