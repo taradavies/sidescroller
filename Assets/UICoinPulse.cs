@@ -12,6 +12,10 @@ public class UICoinPulse : MonoBehaviour
         GameManager.Instance.OnCoinCollected += GameManager_OnCoinCollected;
     }
 
+    void OnDestroy() {
+        GameManager.Instance.OnCoinCollected -= GameManager_OnCoinCollected;
+    }
+
     private void GameManager_OnCoinCollected(int coin)
     {
        _coinController.SetTrigger("PickedUp");
