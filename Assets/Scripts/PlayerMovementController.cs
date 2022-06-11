@@ -30,18 +30,32 @@ public class PlayerMovementController : MonoBehaviour, IMove
     {
         _horizontalInput = Input.GetAxis("Horizontal");
         Speed = _horizontalInput;
-    }
-
-    void FixedUpdate()
-    {
-        // move based on user input
-        MoveHorizontal();
 
         // jumps check
         if (ShouldStartJump())
         {
             Jump();
         }
+        if (ShouldVariableJump()) 
+        {
+            VariableJump();
+        }
+    }
+
+    void FixedUpdate()
+    {
+        // move based on user input
+        MoveHorizontal();
+    }
+
+    private void VariableJump()
+    {
+        _rb.velocity = new Vector2(_rb.velocity.x, _jumpVelocity * 0.5f);
+    }
+
+    private bool ShouldVariableJump()
+    {
+        return  Input.GetButtonUp("Jump") && _rb.velocity.y > 0;
     }
 
     void MoveHorizontal()
