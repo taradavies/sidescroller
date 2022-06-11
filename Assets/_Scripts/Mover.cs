@@ -39,9 +39,9 @@ public abstract class Mover : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision) {
         if (collision.WasHitByPlayer())
         {
-            CollidedWithPlayer(collision.gameObject.GetComponent<PlayerMovementController>());
+            CollidedWithPlayer(collision);
         }
     }
 
-    protected abstract void CollidedWithPlayer(PlayerMovementController player);
+    protected abstract void CollidedWithPlayer(Collision2D collision);
 }

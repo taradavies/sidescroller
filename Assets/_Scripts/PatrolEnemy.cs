@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PatrolEnemy : Mover
 {
-    protected override void CollidedWithPlayer(PlayerMovementController player)
+    protected override void CollidedWithPlayer(Collision2D collision)
     {
         GameManager.Instance.KillPlayer();
     }
