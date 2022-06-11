@@ -13,8 +13,9 @@ public class Breakable : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision) {
         if (collision.WasHitByPlayer() && collision.WasHitFromBottomSide()) {
-            _breakingFX.Play();
             DisableObject();
+            _breakingFX.Play();
+            
         }
     }
 
