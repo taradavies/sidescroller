@@ -9617,12 +9617,8 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1774870121, guid: db96920e85bf2da42a8361b50bf28bd8, type: 3}
-      propertyPath: _jumpVelocity
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 1774870124, guid: db96920e85bf2da42a8361b50bf28bd8, type: 3}
-      propertyPath: m_GravityScale
-      value: 2
+      propertyPath: coyoteTime
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 4572617402725125512, guid: db96920e85bf2da42a8361b50bf28bd8, type: 3}
       propertyPath: m_Name
@@ -9751,11 +9747,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4767572113904879504, guid: f9d1cb5212fb77f468485df69ecbc706, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.011227819
+      value: 0.0112278145
       objectReference: {fileID: 0}
     - target: {fileID: 4767572113904879504, guid: f9d1cb5212fb77f468485df69ecbc706, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.00074295205
+      value: 0.00074295176
       objectReference: {fileID: 0}
     - target: {fileID: 8832342018567591556, guid: f9d1cb5212fb77f468485df69ecbc706, type: 3}
       propertyPath: m_LocalRotation.w
@@ -9767,11 +9763,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8832342018567591556, guid: f9d1cb5212fb77f468485df69ecbc706, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.011227819
+      value: 0.0112278145
       objectReference: {fileID: 0}
     - target: {fileID: 8832342018567591556, guid: f9d1cb5212fb77f468485df69ecbc706, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.00074295205
+      value: 0.00074295176
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9d1cb5212fb77f468485df69ecbc706, type: 3}

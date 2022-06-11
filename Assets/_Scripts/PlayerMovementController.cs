@@ -7,11 +7,10 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovementController : MonoBehaviour, IMove
 {
-    [Header("---Horizontal Movement---")]
     [SerializeField] float _moveSpeed = 5f;
-
-    [Header("---Jump---")]
     [SerializeField] float _jumpVelocity;
+    [SerializeField] float coyoteTime;
+    float coyoteTimeCounter;
 
     // private variables
     Rigidbody2D _rb;
@@ -31,6 +30,8 @@ public class PlayerMovementController : MonoBehaviour, IMove
         _horizontalInput = Input.GetAxis("Horizontal");
         Speed = _horizontalInput;
 
+        IncrementCoyoteTimeCounter();
+
         // jumps check
         if (ShouldStartJump())
         {
@@ -42,20 +43,30 @@ public class PlayerMovementController : MonoBehaviour, IMove
         }
     }
 
+    void IncrementCoyoteTimeCounter()
+    {
+        if (_groundChecker.IsGrounded) {
+            coyoteTimeCounter = coyoteTime;
+        }
+        else {
+            coyoteTimeCounter -= Time.deltaTime;
+        }
+    }
+
     void FixedUpdate()
     {
-        // move based on user input
         MoveHorizontal();
     }
 
     private void VariableJump()
     {
         _rb.velocity = new Vector2(_rb.velocity.x, _jumpVelocity * 0.5f);
+        coyoteTimeCounter = 0;
     }
 
     private bool ShouldVariableJump()
     {
-        return  Input.GetButtonUp("Jump") && _rb.velocity.y > 0;
+        return Input.GetButtonUp("Jump") && _rb.velocity.y > 0;
     }
 
     void MoveHorizontal()
@@ -69,6 +80,6 @@ public class PlayerMovementController : MonoBehaviour, IMove
 
     bool ShouldStartJump()
     {
-        return Input.GetButton("Jump") && _groundChecker.IsGrounded;
+        return coyoteTimeCounter > 0 && Input.GetButtonDown("Jump");
     }
 }
