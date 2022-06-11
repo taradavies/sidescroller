@@ -35,7 +35,20 @@ public class GameManager : MonoBehaviour
         if (Lives <= 0) {
             RestartGame();
         }
+        else {
+            RespawnPlayerToLastCheckPoint();
+        }
     }
+
+    private void RespawnPlayerToLastCheckPoint()
+    {
+        var checkPointManager = FindObjectOfType<CheckPointManager>();
+        var player = FindObjectOfType<PlayerMovementController>();
+
+        Vector3 playerDesiredPosition = checkPointManager.GetLastCheckPointPassed().transform.position;
+        player.transform.position = playerDesiredPosition;
+    }
+
     private void RestartGame()
     {
         Lives = _lives;
