@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class Walker : MonoBehaviour
@@ -27,16 +28,34 @@ public class Walker : MonoBehaviour
 
     void LateUpdate() 
     {
-        if (ReachedEgdeOfPlatform()) {
+        if (ReachedEgdeOfPlatform() || HitNonPlayer()) {
             SwitchDirections();
         }
     }
-    
+
+    bool HitNonPlayer()
+    {
+        float raycastOriginX = GetForwardX();
+        float raycastOriginY = transform.position.y;
+
+        Vector2 raycastOrigin = new Vector2(raycastOriginX, raycastOriginY);
+
+        var wallHitInfo = Physics2D.Raycast(raycastOrigin, _direction, _raycastDistance);
+
+        if (wallHitInfo.collider == null) 
+        {
+            return false;
+        }
+        else if (wallHitInfo.collider.TryGetComponent<PlayerMovementController>(out var player))
+        {
+            return false;
+        }
+        return true;
+    }
+
     bool ReachedEgdeOfPlatform()
     {
-        float raycastOriginX = _direction.x == -1 ? 
-        _collider.bounds.min.x - 0.1f : 
-        _collider.bounds.max.x + 0.1f;
+        float raycastOriginX = GetForwardX();
 
         float raycastOriginY = _collider.bounds.min.y;
 
@@ -44,12 +63,20 @@ public class Walker : MonoBehaviour
 
         var platformHitInfo = Physics2D.Raycast(raycastOrigin, Vector2.down, _raycastDistance, _groundMask);
 
-        if (platformHitInfo.collider == null) {
+        if (platformHitInfo.collider == null)
+        {
             return true;
         }
-        else {
+        else
+        {
             return false;
         }
+    }
+    float GetForwardX()
+    {
+        return _direction.x == -1 ?
+        _collider.bounds.min.x - 0.1f :
+        _collider.bounds.max.x + 0.1f;
     }
 
     void SwitchDirections()
@@ -61,5 +88,36 @@ public class Walker : MonoBehaviour
     void FlipSprite()
     {
         _spriteRenderer.flipX = !_spriteRenderer.flipX;
+    }
+
+    void OnCollisionEnter2D(Collision2D collision) 
+    {
+        if (collision.WasHitByPlayer())
+        {
+            if (collision.WasHitFromTopSide()) 
+            {
+                StartCoroutine(FadeAndDie());
+            }
+            else {
+                GameManager.Instance.KillPlayer();
+            }
+        }
+
+    }
+    IEnumerator FadeAndDie()
+    {
+        if (GetComponent<Animator>() != null) {
+            GetComponent<Animator>().enabled = false;
+        }
+        this.enabled = false;
+        _rb.simulated = false;
+        float alpha = 1;
+        while (alpha > 0)
+        {
+            yield return null;
+            alpha -= Time.deltaTime;
+            _spriteRenderer.color = new Color(1, 1, 1, alpha);
+        }
+        gameObject.SetActive(false);
     }
 }
