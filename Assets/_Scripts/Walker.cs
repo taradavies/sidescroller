@@ -8,6 +8,9 @@ public class Walker : MonoBehaviour
     [SerializeField] float _moveSpeed;
     [SerializeField] float _raycastDistance;
     [SerializeField] LayerMask _groundMask;
+    
+    [Header("---Death Sprite---")]
+    [SerializeField] GameObject _deathSpritePrefab;
 
     Collider2D _collider;
     Rigidbody2D _rb;
@@ -106,11 +109,15 @@ public class Walker : MonoBehaviour
     }
     IEnumerator FadeAndDie()
     {
-        if (GetComponent<Animator>() != null) {
+        if (GetComponent<Animator>() != null) 
             GetComponent<Animator>().enabled = false;
-        }
+        
+        if (_deathSpritePrefab != null) 
+            Instantiate(_deathSpritePrefab, transform.position, transform.rotation);
+
         this.enabled = false;
         _rb.simulated = false;
+
         float alpha = 1;
         while (alpha > 0)
         {
@@ -118,6 +125,5 @@ public class Walker : MonoBehaviour
             alpha -= Time.deltaTime;
             _spriteRenderer.color = new Color(1, 1, 1, alpha);
         }
-        gameObject.SetActive(false);
     }
 }

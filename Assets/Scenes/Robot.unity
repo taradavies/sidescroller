@@ -10014,6 +10014,10 @@ PrefabInstance:
       propertyPath: _jumpVelocity
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 23913718989367273, guid: db96920e85bf2da42a8361b50bf28bd8, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4572617402725125512, guid: db96920e85bf2da42a8361b50bf28bd8, type: 3}
       propertyPath: m_Name
       value: Player
@@ -10434,6 +10438,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5854311516372951040, guid: d1953f2bf04f84045888b7b502309a8e, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 9fbd90b8d08443048a1a6a1836d9c52f, type: 2}
+    - target: {fileID: 5854311516372951041, guid: d1953f2bf04f84045888b7b502309a8e, type: 3}
+      propertyPath: _deathSpritePrefab
+      value: 
+      objectReference: {fileID: 740641105501265254, guid: e97ed90777154194088b7543ab1e1c2c, type: 3}
     - target: {fileID: 5854311516372951046, guid: d1953f2bf04f84045888b7b502309a8e, type: 3}
       propertyPath: m_RootOrder
       value: 10
